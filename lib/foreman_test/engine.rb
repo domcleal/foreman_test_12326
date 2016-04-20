@@ -18,26 +18,7 @@ module ForemanTest
 
     initializer 'foreman_test.register_plugin', after: :finisher_hook do |_app|
       Foreman::Plugin.register :foreman_test do
-        requires_foreman '>= 1.4'
-
-        # Add permissions
-        security_block :foreman_test do
-          permission :view_foreman_test, :'foreman_test/hosts' => [:new_action]
-        end
-
-        # Add a new role called 'Discovery' if it doesn't exist
-        role 'ForemanTest', [:view_foreman_test]
-
-        # add menu entry
-        menu :top_menu, :template,
-             url_hash: { controller: :'foreman_test/hosts', action: :new_action },
-             caption: 'ForemanTest',
-             parent: :hosts_menu,
-             after: :hosts
-
-        # add dashboard widget
-        widget 'foreman_test_widget', name: N_('Foreman plugin template widget'), sizex: 4, sizey: 1
-
+        requires_foreman '>= 1.10'
         register_custom_status HostStatus::Foo
       end
     end
@@ -61,12 +42,6 @@ module ForemanTest
     # Include concerns in this config.to_prepare block
     config.to_prepare do
       HostStatus::Foo
-      begin
-        Host::Managed.send(:include, ForemanTest::HostExtensions)
-        HostsHelper.send(:include, ForemanTest::HostsHelperExtensions)
-      rescue => e
-        Rails.logger.warn "ForemanTest: skipping engine hook (#{e})"
-      end
     end
 
     rake_tasks do

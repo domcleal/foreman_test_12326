@@ -5,17 +5,14 @@ Gem::Specification.new do |s|
   s.name        = 'foreman_test'
   s.version     = ForemanTest::VERSION
   s.date        = Date.today.to_s
-  s.authors     = ['TODO: Your name']
-  s.email       = ['TODO: Your email']
-  s.homepage    = 'TODO'
-  s.summary     = 'TODO: Summary of ForemanTest.'
+  s.authors     = ['Your name']
+  s.email       = ['Your email']
+  s.homepage    = 'http://trada.com'
+  s.summary     = 'Summary of ForemanTest.'
   # also update locale/gemspec.rb
-  s.description = 'TODO: Description of ForemanTest.'
+  s.description = 'Description of ForemanTest.'
 
   s.files = Dir['{app,config,db,lib,locale}/**/*'] + ['LICENSE', 'Rakefile', 'README.md']
   s.test_files = Dir['test/**/*']
 
-  s.add_dependency 'deface'
-  s.add_development_dependency 'rubocop'
-  s.add_development_dependency 'rdoc'
 end
